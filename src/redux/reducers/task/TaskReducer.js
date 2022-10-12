@@ -3,24 +3,25 @@ import * as Types from '../../types/Types'
 const initializeState = {
   tasks: [],
   taskForm: {
-    Title: "",
-    Priority: ""
+    title: "",
+    status: ""
   }
 };
+
 //Do jobs on changes on action...........
 
 function TaskReducer(state = initializeState, action) {
   switch (action.type) {
 
-    case Types.ADD_TASK://if i make type this way,less mistake could happen
-      return {
-        ...state,
-        taskForm: {
-          Title: "",
-          Priority: ""
-        }
-      };
-      break;
+    // case Types.ADD_TASK://if i make type this way,less mistake could happen
+    //   return {
+    //     ...state,
+    //     taskForm: {
+    //       Title: "",
+    //       Priority: ""
+    //     }
+    //   };
+    //   break;
     case Types.GET_TASK_DETAILS://if i make type this way,less mistake could happen
       return {
         ...state,

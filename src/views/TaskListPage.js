@@ -17,7 +17,7 @@ function TaskListPage() {
   const handleShow = () => setShow(true);
   //const [tasks, setTasks] = useState([]);
   const tasks = useSelector((state) => state.TaskReducer.tasks);
-  // console.log("innnn",tasks)
+  console.log("innnn",tasks)
  
   useEffect(() => {
     //  initializeData();

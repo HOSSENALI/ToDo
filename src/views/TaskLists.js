@@ -22,9 +22,9 @@ const TaskLists = (props) => {
             <thead>
                 <tr>
                     <th>#</th>
-                    <th>Task Id</th>
                     <th>Task Title</th>
-                    <th>Priority</th>
+                    <th>Status</th>
+                    <th>Deadline</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -32,15 +32,15 @@ const TaskLists = (props) => {
                 {tasks.map((task, index) => (
                     <tr key={index}>
                         <td>{index + 1}</td>
-                        <td>{task._id}</td>
-                        <td>{task.Title}</td>
-                        <td>{task.Priority}</td>
+                        <td>{task.todo.title}</td>
+                        <td>{task.todo.status}</td>
+                        <td>{task.todo.deadline}</td>
                         <td>
-                            <Link to={`/edit/${task._id}`}>
-                            <span><i className='fa fa-pencil text-success pointer mr-2'> Edit Task</i></span>
+                            <Link to={`/edit/${task.id}`}>
+                            <span><i className='fa fa-pencil text-success pointer mr-2'> Edit Task {task.id}</i></span>
                         </Link>
 
-                        <span> <i className='fa fa-trash text-danger pointer ml-2'onClick={()=>dispatch(deleteTasksDataAction(task._id))}> Delete Task</i></span>
+                        <span> <i className='fa fa-trash text-danger pointer ml-2'onClick={()=>dispatch(deleteTasksDataAction(task.id))}> Delete Task</i></span>
                     </td>
                     </tr>
                 ))}
