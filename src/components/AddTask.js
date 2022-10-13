@@ -5,10 +5,11 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import {serverTimestamp} from 'firebase/firestore';
 
 import { storeTasksDataAction } from "../redux/actions/TaskAction";
 import { useDispatch, useSelector } from "react-redux";
-import moment, { parseTwoDigitYear } from "moment";
+import moment from "moment";
 
 const AddTask = (props) => {
   const [title, setTitle] = useState("");
@@ -16,29 +17,42 @@ const AddTask = (props) => {
   const [deadline, setDeadline] = useState(null);
   const dispatch = useDispatch();
   const { handleClose, setShow } = props;
-  console.log(deadline);
-
-  // const taskForm = useSelector((state) => state.TaskReducer.taskForm);
-
-  // const handleChangeText = (name, value) => {
-  //     dispatch(handleChangeTextInputAction(name, value));
-  // }
 
   const saveTask = async () => {
-    console.log("deadline", deadline);
-    const taskForm = {
-      title: title,
-      status: status,
-      //   deadline: Date.parse(moment(deadline).format('YYYY-MM-DD'))-Date.now()
-      deadline: moment(deadline).format("YYYY-MM-DD"),
-    };
-    dispatch(storeTasksDataAction(taskForm));
-    setShow(false);
+    console.log(deadline)
+    if (checkValidation()) {
+      const taskForm = {
+        title: title,
+        status: status,
+        deadline: moment(deadline).format("YYYY-MM-DD"),
+        createdAt:serverTimestamp()
+      };
+
+      dispatch(storeTasksDataAction(taskForm));
+      setShow(false);
+    }
   };
-  //   const changeDateFormat= (date)=>{
-  //     let changedDate = moment(date).format('YYYY-MM-DD');
-  //     setDeadline(changedDate);
-  //   }
+
+  const checkValidation = () => {
+    if (title.length < 10) {
+      alert("Title must be more than 10 characters");
+      return false;
+    }
+    if (title.length === 0) {
+      alert("Please enter title ");
+      return false;
+    }
+    if (status === "") {
+      alert("Please select status");
+      return false;
+    }
+    if (deadline === null) {
+      alert("Please select a deadline");
+      return false;
+    }
+    return true;
+  };
+
   return (
     <>
       <Modal.Header closeButton>
@@ -71,7 +85,7 @@ const AddTask = (props) => {
                 onChange={(date) => setDeadline(date)}
                 dateFormat="yyyy/MM/dd"
                 filterDate={(date) => date.getDay() != 6 && date.getDay() != 0}
-                minDate={new Date()}
+                //minDate={new Date()}
                 isClearable
                 showYearDropdown
                 scrollableMonthYearDropdown

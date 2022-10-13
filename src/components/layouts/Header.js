@@ -6,7 +6,6 @@ import { Link } from "react-router-dom";
 
 const Header = () => {
     const tasks = useSelector((state) => state.TaskReducer.tasks);
-    const counter = useSelector((state) => state.CounterReducer.counter);
     return (<>
         <Navbar bg="light" expand="lg">
             <div className="container">
