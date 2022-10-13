@@ -13,12 +13,16 @@ import { getTasksDataAction } from '../redux/actions/TaskAction';
 function TaskListPage() {
   const dispatch = useDispatch();
   const [show, setShow] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [showEditModal, setShowEditModal] = useState(false);
+  const handleCloseModal = () => setShowModal(false);
+  const handleShowModal = () => setShowModal(true);
+  const handleCloseEditModal = () => setShowEditModal(false);
+  const handleShowEditModal = () => setShowEditModal(true);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   //const [tasks, setTasks] = useState([]);
-  const tasks = useSelector((state) => state.TaskReducer.tasks);
-  console.log("innnn",tasks)
- 
+  const tasks = useSelector((state) => state.TaskReducer.tasks); 
   useEffect(() => {
     //  initializeData();
     dispatch(getTasksDataAction());
@@ -41,7 +45,15 @@ function TaskListPage() {
           <AddTask handleClose={handleClose} setShow={setShow} />
         </Modal>
         <TaskLists tasks={tasks} handleShow={handleShow} />
+        {/* <Modal
+          show={showEditModal}
+          onHide={handleCloseEditModal}
+          animation={true}
+          centered
+            >
+                <TaskListPage/>
 
+            </Modal> */}
       </Layout>
     </>
   );

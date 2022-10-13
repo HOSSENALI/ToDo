@@ -2,9 +2,12 @@ import * as Types from '../../types/Types'
 //initialize a store object.............
 const initializeState = {
   tasks: [],
+  id:"",
   taskForm: {
     title: "",
-    status: ""
+    status: "",
+    deadline:"",
+    createdAt:""
   }
 };
 
@@ -13,19 +16,11 @@ const initializeState = {
 function TaskReducer(state = initializeState, action) {
   switch (action.type) {
 
-    // case Types.ADD_TASK://if i make type this way,less mistake could happen
-    //   return {
-    //     ...state,
-    //     taskForm: {
-    //       Title: "",
-    //       Priority: ""
-    //     }
-    //   };
-    //   break;
-    case Types.GET_TASK_DETAILS://if i make type this way,less mistake could happen
-      return {
+    case Types.GET_TASK_DETAILS://if i make Type this way,less mistake could happen
+    console.log(action.payload.id)  
+    return {
         ...state,
-        taskForm: action.payload
+        taskForm: action.payload.todo, id:action.payload.id
       };
       break;
     case Types.GET_TASK:
@@ -33,14 +28,6 @@ function TaskReducer(state = initializeState, action) {
         ...state,
         tasks: action.payload,
 
-      }
-      break;
-    case Types.CHANGE_TASK_INPUT:
-      const taskForm = { ...state.taskForm };
-      taskForm[action.payload.name] = action = action.payload.value;
-      return {
-        ...state,
-        taskForm: taskForm,
       }
       break;
     default:
