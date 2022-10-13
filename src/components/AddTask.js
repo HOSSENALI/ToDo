@@ -3,21 +3,20 @@ import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
-
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 import { storeTasksDataAction } from "../redux/actions/TaskAction";
 import { useDispatch, useSelector } from "react-redux";
-import { parseTwoDigitYear } from "moment";
+import moment, { parseTwoDigitYear } from "moment";
 
 const AddTask = (props) => {
   const [title, setTitle] = useState("");
   const [status, setStatus] = useState("");
   const [deadline, setDeadline] = useState(null);
-
   const dispatch = useDispatch();
   const { handleClose, setShow } = props;
+  console.log(deadline);
 
   // const taskForm = useSelector((state) => state.TaskReducer.taskForm);
 
@@ -26,16 +25,20 @@ const AddTask = (props) => {
   // }
 
   const saveTask = async () => {
+    console.log("deadline", deadline);
     const taskForm = {
       title: title,
       status: status,
-    //   deadline:(deadline)
-      
+      //   deadline: Date.parse(moment(deadline).format('YYYY-MM-DD'))-Date.now()
+      deadline: moment(deadline).format("YYYY-MM-DD"),
     };
     dispatch(storeTasksDataAction(taskForm));
-    console.log("Hellooooo",taskForm);
     setShow(false);
   };
+  //   const changeDateFormat= (date)=>{
+  //     let changedDate = moment(date).format('YYYY-MM-DD');
+  //     setDeadline(changedDate);
+  //   }
   return (
     <>
       <Modal.Header closeButton>
@@ -54,8 +57,6 @@ const AddTask = (props) => {
             />
           </Form.Group>
 
-
-
           <Form.Group
             as={Row}
             className="mb-3"
@@ -65,21 +66,18 @@ const AddTask = (props) => {
               Deadline
             </Form.Label>
             <Col sm="5">
-            <DatePicker
-                  selected={deadline}
-                onChange={date => setDeadline(date)}
-                dateFormat='dd/MM/yyyy'
-                filterDate={date => date.getDay() != 6 && date.getDay() != 0}
+              <DatePicker
+                selected={deadline}
+                onChange={(date) => setDeadline(date)}
+                dateFormat="yyyy/MM/dd"
+                filterDate={(date) => date.getDay() != 6 && date.getDay() != 0}
                 minDate={new Date()}
                 isClearable
                 showYearDropdown
                 scrollableMonthYearDropdown
               />
-            </Col> 
+            </Col>
           </Form.Group>
-
-
-
 
           <Form.Group
             as={Row}
@@ -98,7 +96,6 @@ const AddTask = (props) => {
                 onChange={(e) => setStatus(e.target.value)}
               >
                 <option value={""}>Please select Status</option>
-
                 <option value={"Done"}>Done</option>
                 <option value={"Pending"}>Pending</option>
               </select>

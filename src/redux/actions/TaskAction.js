@@ -19,8 +19,12 @@ export const getTasksDataAction = () => (dispatch) => {
   });
 };
 export const getTasksDetailsDataAction = (id) => (dispatch) => {
-  let data= db.collection("todos").doc(id).set()
-    dispatch({ type: Types.GET_TASK_DETAILS, payload: data });
+  axios
+    .get(`https://todo-app37.herokuapp.com/singleTodo?id=${id}`)
+    .then((response) => {
+      let data = response.data;
+      dispatch({ type: Types.GET_TASK_DETAILS, payload: data });
+    });
 };
 
 export const storeTasksDataAction = (taskItem) => (dispatch) => {
