@@ -2,10 +2,16 @@ import moment from "moment";
 import React, { useState } from "react";
 import { Button, Card, Modal, Table } from "react-bootstrap";
 import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
 import EditTask from "../components/EditTask";
 import { deleteTasksDataAction, getTasksDetailsDataAction } from "../redux/actions/TaskAction";
-const TaskLists = (props) => {
+import { Task } from "../redux/reducers/task/TaskReducer";
+
+interface IProps{
+  tasks: Task[],
+  handleShow:()=> void
+
+}
+const TaskLists = (props:IProps) => {
   const { tasks, handleShow } = props;
   const [editData, setEditData] = useState("");
   const [showEditModal, setShowEditModal] = useState(false);
@@ -13,13 +19,13 @@ const TaskLists = (props) => {
   const handleShowEditModal = () => setShowEditModal(true);
   const dispatch = useDispatch();
 
-  const overdueCheck = (deadline, status) => {
+  const overdueCheck = (deadline:string, status:string) => {
     let result = moment(deadline).diff(moment().format('YYYY-MM-DD'),'days');
     if (result < 0 && status === "Pending") {
       return true;
     } else return false;
   };
-  const editUser = (task) => {
+  const editUser = (task:Task) => {
     dispatch(getTasksDetailsDataAction(task));
     handleShowEditModal();
 }
@@ -45,13 +51,13 @@ const TaskLists = (props) => {
               <th>Action</th>
             </tr>
           </thead>
-          {tasks.length === 0 && (
+          {tasks?.length === 0 && (
             <h3 style={{ marginLeft: "300px" }}>
               Sorry!!! You have no todo.........
             </h3>
           )}
           <tbody>
-            {tasks.map((task, index) => (
+            {tasks?.map((task, index) => (
               <tr key={index}>
                 <td>{index + 1}</td>
                 <td>{task.todo.title}</td>
@@ -96,7 +102,7 @@ const TaskLists = (props) => {
           animation={true}
           centered
         >
-            <EditTask handleCloseEditModal={handleCloseEditModal} editData={editData}/>
+            <EditTask handleCloseEditModal={handleCloseEditModal} />
         </Modal>
     </Card>
   );

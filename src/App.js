@@ -1,38 +1,41 @@
-import React from "react";
+import { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import TaskListPage from "./views/TaskListPage";
-import TaskDetailsPage from "./views/TaskDetailsPage";
-import AboutUs from "./views/AboutUs";
-import Login from "./login/Login";
-import TaskEditPage from "./views/TaskEditPage";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import Authentication from "./components/authentication/authentication.component";
 
 function App() {
+  const [currentUser, setCurrentUser] = useState(false);
+
+  useEffect(() => {
+    // @ts-ignore
+    const userData = JSON.parse(localStorage.getItem("userData")) || undefined;
+    if (typeof userData !== 'undefined') {
+      setCurrentUser(true);
+    }else{
+      setCurrentUser(false)
+    }
+  }, [currentUser]);
+
   return (
     <div className="App">
-      <Router>
-        <div>
-          <Switch>
-            <Route path="/about-us" exact={true}>
-              <AboutUs />
-            </Route>
-            <Route path="/" exact={true}>
-              <TaskListPage />
-            </Route>
-            <Route path="/task-details" exact={true}>
-              <TaskDetailsPage />
-            </Route>
-            <Route path="/edit/:id" exact={true}>
-              <TaskEditPage />
-            </Route>
-            <Route path="/login" exact={true}>
-              <Login />
-            </Route>
-          </Switch>
+     
+<BrowserRouter>
+<Routes>
 
-        </div>
-      </Router>
+ 
+  <Route  path="/" element={
+    currentUser?<TaskListPage/>:<Navigate to="/login" />
+   } />
+
+  <Route  path="/login" element={
+    currentUser?<Navigate to="/" />:<Authentication/>
+   } />
+
+  </Routes>
+   </BrowserRouter>
+
     </div>
   );
 }

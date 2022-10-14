@@ -10,11 +10,16 @@ import {serverTimestamp} from 'firebase/firestore';
 import { storeTasksDataAction } from "../redux/actions/TaskAction";
 import { useDispatch, useSelector } from "react-redux";
 import moment from "moment";
+import { type } from "@testing-library/user-event/dist/type";
 
-const AddTask = (props) => {
+type Iprops= {
+ handleClose:()=> boolean;
+ setShow:(a:boolean)=> boolean
+}
+const AddTask = (props:Iprops) => {
   const [title, setTitle] = useState("");
   const [status, setStatus] = useState("");
-  const [deadline, setDeadline] = useState(null);
+  const [deadline, setDeadline] = useState(new Date());
   const dispatch = useDispatch();
   const { handleClose, setShow } = props;
 
@@ -82,9 +87,9 @@ const AddTask = (props) => {
             <Col sm="5">
               <DatePicker
                 selected={deadline}
-                onChange={(date) => setDeadline(date)}
+                onChange={(date:Date) => setDeadline((date))}
                 dateFormat="yyyy/MM/dd"
-                filterDate={(date) => date.getDay() != 6 && date.getDay() != 0}
+                filterDate={(date:Date) => date.getDay() != 6 && date.getDay() != 0}
                 //minDate={new Date()}
                 isClearable
                 showYearDropdown
@@ -118,10 +123,10 @@ const AddTask = (props) => {
         </Form>
       </Modal.Body>
       <Modal.Footer>
-        <button variant="secondary" onClick={handleClose}>
+        <button  onClick={handleClose}>
           Close
         </button>
-        <button variant="primary" onClick={saveTask}>
+        <button  onClick={saveTask}>
           Save Changes
         </button>
       </Modal.Footer>

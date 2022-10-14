@@ -5,20 +5,24 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import { updateTasksDataAction } from "../redux/actions/TaskAction";
 import { useDispatch, useSelector } from "react-redux";
+import { rootState } from "../redux/reducers/RootReducer";
+import { Button } from "react-bootstrap";
 
-import db from "../firebase";
+export interface IProps{
+  handleCloseEditModal:(a:boolean)=>void
+}
 
-const EditTask = (props) => {
+const EditTask = (props: IProps) => {
   const { handleCloseEditModal } = props;
-  const taskForm = useSelector((state) => state.TaskReducer.taskForm);
-  const taskId = useSelector((state) => state.TaskReducer.id);
+  const taskForm = useSelector((state:rootState) => state.TaskReducer.taskForm);
+  const taskId = useSelector((state:rootState) => state.TaskReducer.id);
 
   const [title, setTitle] = useState(taskForm.title);
   const [status, setStatus] = useState(taskForm.status);
   const dispatch = useDispatch();
 
   const handleClose = () => {
-    handleCloseEditModal();
+    handleCloseEditModal(false);
   };
 
   const updateTask = async () => {
@@ -26,7 +30,7 @@ const EditTask = (props) => {
       const newTaskForm = {
         title: title,
         status: status,
-      };
+      }
       dispatch(updateTasksDataAction(newTaskForm, taskId));
       console.log("last");
       handleCloseEditModal(false);
@@ -91,12 +95,12 @@ const EditTask = (props) => {
         </Form>
       </Modal.Body>
       <Modal.Footer>
-        <button variant="secondary" onClick={handleClose}>
+        <Button variant="secondary" onClick={handleClose}>
           Close
-        </button>
-        <button variant="primary" onClick={updateTask}>
+        </Button>
+        <Button variant="primary" onClick={updateTask}>
           Save Changes
-        </button>
+        </Button>
       </Modal.Footer>
     </>
   );

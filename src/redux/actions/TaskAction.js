@@ -1,5 +1,5 @@
 import * as Types from "../types/Types";
-import db from "../../firebase";
+import db from "../../components/utils/firebase/firebase.utils";
 //getting data from databse.....................................................
 export const getTasksDataAction = () => (dispatch) => {
   db.collection("todos")

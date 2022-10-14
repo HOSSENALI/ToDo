@@ -1,6 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'font-awesome/css/font-awesome.min.css';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Modal } from 'react-bootstrap'
 
 import Layout from '../components/layouts/Layout';
@@ -28,6 +28,7 @@ function TaskListPage() {
     dispatch(getTasksDataAction());
     
   }, []);
+
 
   return (
     <>
