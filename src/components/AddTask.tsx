@@ -21,7 +21,8 @@ export type singleTask = {
   title: string,
   status: string,
   deadline?: string,
-  createdAt?:any
+  createdAt?:any,
+  userEmail?:string
 }
 const AddTask = (props:Iprops) => {
   const [title, setTitle] = useState("");
@@ -30,15 +31,17 @@ const AddTask = (props:Iprops) => {
   const dispatch = useDispatch();
   const { handleClose, setShow } = props;
 
-
   const saveTask = async () => {
 
     if (checkValidation()) {
+      // @ts-ignore
+      const userData = JSON.parse(localStorage.getItem("userData")) || undefined;
       const taskForm:singleTask = {
         title,
         status,
         deadline: moment(deadline).format("YYYY-MM-DD"),
-        createdAt:serverTimestamp()
+        createdAt:serverTimestamp(),
+        userEmail: userData.user.email
       };
 
       dispatch(storeTasksDataAction(taskForm));
