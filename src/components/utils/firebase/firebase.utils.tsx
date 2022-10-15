@@ -44,20 +44,25 @@ export const createAuthUserWithEmailAndPassword = async (
   password: string,
   displayName: string
 ) => {
-  if (!email || !password) return;
-  return await createUserWithEmailAndPassword(auth, email, password).then(
+  if (!email || !password) return
+
+  createUserWithEmailAndPassword(auth, email, password).then(
     (userCredentials) => {
       const user = userCredentials.user;
       console.log("user", user);
       updateProfile(user, { displayName: displayName })
         .then((s) => {
-          window.location.href = "/auth";
+          window.location.href = "/";
         })
         .catch((error) => {
           alert(error.message);
         });
     }
-  );
+  ).catch((err)=>{
+    const errorCode = err.code
+    const errorMsg = err.message
+    alert(errorMsg)
+  });
 };
 
 // sing-in with email and function....................

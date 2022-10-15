@@ -13,6 +13,7 @@ interface IProps{
 }
 const TaskLists = (props:IProps) => {
   const { tasks, handleShow } = props;
+  console.log(tasks)
   const [editData, setEditData] = useState("");
   const [showEditModal, setShowEditModal] = useState(false);
   const handleCloseEditModal = () => setShowEditModal(false);

@@ -13,8 +13,15 @@ import moment from "moment";
 import { type } from "@testing-library/user-event/dist/type";
 
 type Iprops= {
- handleClose:()=> boolean;
- setShow:(a:boolean)=> boolean
+ handleClose:()=> void;
+ setShow:(a:boolean)=> void
+}
+
+export type singleTask = {
+  title: string,
+  status: string,
+  deadline?: string,
+  createdAt?:any
 }
 const AddTask = (props:Iprops) => {
   const [title, setTitle] = useState("");
@@ -23,12 +30,13 @@ const AddTask = (props:Iprops) => {
   const dispatch = useDispatch();
   const { handleClose, setShow } = props;
 
+
   const saveTask = async () => {
-    console.log(deadline)
+
     if (checkValidation()) {
-      const taskForm = {
-        title: title,
-        status: status,
+      const taskForm:singleTask = {
+        title,
+        status,
         deadline: moment(deadline).format("YYYY-MM-DD"),
         createdAt:serverTimestamp()
       };
@@ -87,10 +95,9 @@ const AddTask = (props:Iprops) => {
             <Col sm="5">
               <DatePicker
                 selected={deadline}
-                onChange={(date:Date) => setDeadline((date))}
+                onChange={(date: Date) => setDeadline(date)}
                 dateFormat="yyyy/MM/dd"
                 filterDate={(date:Date) => date.getDay() != 6 && date.getDay() != 0}
-                //minDate={new Date()}
                 isClearable
                 showYearDropdown
                 scrollableMonthYearDropdown

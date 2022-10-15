@@ -1,30 +1,45 @@
 import * as Types from "../types/Types";
 import db from "../../components/utils/firebase/firebase.utils";
+import { Dispatch } from "redux";
+import { GET_TASKS } from "./actionTypes";
+import { Task } from "../reducers/task/TaskReducer";
+import { singleTask } from "../../components/AddTask";
 //getting data from databse.....................................................
-export const getTasksDataAction = () => (dispatch) => {
+
+export function getTasksAction(tasks:Task[]):Types.GetTasksActionsType{
+  return {
+    type: GET_TASKS,
+    payload: {
+         tasks
+    }
+  }
+
+}
+export const getTasksDataAction = () => (dispatch:Dispatch) => {
   db.collection("todos")
     .orderBy("createdAt", "desc")
     .onSnapshot((snapshot) => {
       let data = snapshot.docs.map((doc) => ({ id: doc.id, todo: doc.data() }));
-      dispatch({ type: Types.GET_TASK, payload: data });
+      dispatch(getTasksAction(data))
+      // dispatch({ type: Types.GET_TASK, payload: data });
     });
 };
 
 //storing data to database.......................................................
-export const storeTasksDataAction = (taskItem) => (dispatch) => {
+export const storeTasksDataAction = (taskItem:singleTask) => (dispatch:Dispatch) => {
   db.collection("todos").add(taskItem);
 };
 
 //getting task details for every single task and saving to state ................
-export const getTasksDetailsDataAction = (task) => (dispatch) => {
+export const getTasksDetailsDataAction = (task:Task) => (dispatch:Dispatch) => {
   dispatch({ type: Types.GET_TASK_DETAILS, payload: task });
 };
 
 //updating data to database......................................................
-export const updateTasksDataAction = (taskFormNew, taskId) =>()=> {
+export const updateTasksDataAction = (taskFormNew:any, taskId:any) =>()=> {
   db.collection("todos").doc(taskId).set(taskFormNew, { merge: true });
 };
 //deleting task from database......................................................
-export const deleteTasksDataAction = (id) => {
+export const deleteTasksDataAction = (id:string) => {
   db.collection("todos").doc(id).delete();
 };

@@ -9,6 +9,7 @@ import AddTask from '../components/AddTask';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { getTasksDataAction } from '../redux/actions/TaskAction';
+import { rootState } from '../redux/reducers/RootReducer';
 
 function TaskListPage() {
   const dispatch = useDispatch();
@@ -22,7 +23,7 @@ function TaskListPage() {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   //const [tasks, setTasks] = useState([]);
-  const tasks = useSelector((state) => state.TaskReducer.tasks); 
+  const tasks = useSelector((state:rootState) => state.TaskReducer.tasks); 
   useEffect(() => {
     //  initializeData();
     dispatch(getTasksDataAction());
