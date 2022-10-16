@@ -40,8 +40,8 @@ export const createAuthUserWithEmailAndPassword = async (
       const user = userCredentials.user;
       console.log("user", user);
       updateProfile(user, { displayName: displayName })
-        .then((s) => {
-          window.location.href = "/";
+        .then(() => {
+          signInAuthUserWithEmailAndPassword(email,password);
         })
         .catch((error) => {
           alert(error.message);
@@ -51,8 +51,6 @@ export const createAuthUserWithEmailAndPassword = async (
     const errorMsg = err.message
     alert(errorMsg)
   });
-
-  signInAuthUserWithEmailAndPassword(email,password);
 };
 
 // sing-in with email and function....................
