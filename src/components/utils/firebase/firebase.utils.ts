@@ -48,28 +48,24 @@ export const createAuthUserWithEmailAndPassword = async (
         });
     }
   ).catch((err)=>{
-    const errorCode = err.code
     const errorMsg = err.message
     alert(errorMsg)
   });
+
+  signInAuthUserWithEmailAndPassword(email,password);
 };
 
 // sing-in with email and function....................
 export const signInAuthUserWithEmailAndPassword = async (
   email: string,
   password: string,
-  redirectUrl: URLSearchParams
 ) => {
   if (!email || !password) return;
   try {
     const loginResult = await signInWithEmailAndPassword(auth, email, password);
     localStorage.setItem("userData", JSON.stringify(loginResult));
-    console.log(redirectUrl.get("redirectTo"));
-    if (redirectUrl.get("redirectTo") === "") {
-      window.location.href = "/";
-    } else {
-      window.location.href = String(redirectUrl.get("redirectTo"));
-    }
+     window.location.href = "/";
+    
   } catch (err) {
     console.error(err);
     alert("Username and password does not match.");
