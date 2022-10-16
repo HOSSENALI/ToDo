@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword, getAuth, GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup, updateProfile } from 'firebase/auth';
+import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
@@ -24,20 +24,9 @@ export default db;
 
 
 // ........................................
-const googleProvider = new GoogleAuthProvider();
 
 export const auth = getAuth();
 
-export const signInWithGooglePopup = () => {
-  signInWithPopup(auth, googleProvider)
-    .then((result) => {
-      localStorage.setItem("userData", JSON.stringify(result));
-      window.location.href = "/";
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-};
 // creating auth...............
 export const createAuthUserWithEmailAndPassword = async (
   email: string,
