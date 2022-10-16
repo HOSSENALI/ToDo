@@ -5,27 +5,45 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import {serverTimestamp} from 'firebase/firestore';
+import { serverTimestamp } from "firebase/firestore";
 
 import { storeTasksDataAction } from "../redux/actions/TaskAction";
 import { useDispatch, useSelector } from "react-redux";
 import moment from "moment";
+import { type } from "@testing-library/user-event/dist/type";
 
-const AddTask = (props) => {
+type Iprops = {
+  handleClose: () => void;
+  setShow: (a: boolean) => void;
+};
+
+export type singleTask = {
+  title: string;
+  status: string;
+  deadline?: string;
+  createdAt?: any;
+  userEmail?: string;
+};
+const AddTask = (props: Iprops) => {
   const [title, setTitle] = useState("");
   const [status, setStatus] = useState("");
-  const [deadline, setDeadline] = useState(null);
+  const [deadline, setDeadline] = useState(new Date());
   const dispatch = useDispatch();
   const { handleClose, setShow } = props;
 
   const saveTask = async () => {
-    console.log(deadline)
     if (checkValidation()) {
-      const taskForm = {
-        title: title,
-        status: status,
+     
+      const userData =
+    // @ts-ignore
+        JSON.parse(localStorage.getItem("userData")) || undefined;
+        console.log(userData)
+      const taskForm: singleTask = {
+        title,
+        status,
         deadline: moment(deadline).format("YYYY-MM-DD"),
-        createdAt:serverTimestamp()
+        createdAt: serverTimestamp(),
+        userEmail: userData.user.email,
       };
 
       dispatch(storeTasksDataAction(taskForm));
@@ -68,6 +86,7 @@ const AddTask = (props) => {
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               autoFocus
+              data-testid="title"
             />
           </Form.Group>
 
@@ -79,16 +98,19 @@ const AddTask = (props) => {
             <Form.Label column sm="4">
               Deadline
             </Form.Label>
-            <Col sm="5">
+            <Col sm="5"    data-testid="deadline">
+         
               <DatePicker
                 selected={deadline}
-                onChange={(date) => setDeadline(date)}
+                onChange={(date: Date) => setDeadline(date)}
                 dateFormat="yyyy/MM/dd"
-                filterDate={(date) => date.getDay() != 6 && date.getDay() != 0}
-                //minDate={new Date()}
+                filterDate={(date: Date) =>
+                  date.getDay() != 6 && date.getDay() != 0
+                }
                 isClearable
                 showYearDropdown
                 scrollableMonthYearDropdown
+               
               />
             </Col>
           </Form.Group>
@@ -108,6 +130,7 @@ const AddTask = (props) => {
                 required
                 value={status}
                 onChange={(e) => setStatus(e.target.value)}
+                data-testid="status"
               >
                 <option value={""}>Please select Status</option>
                 <option value={"Done"}>Done</option>
@@ -118,10 +141,8 @@ const AddTask = (props) => {
         </Form>
       </Modal.Body>
       <Modal.Footer>
-        <button variant="secondary" onClick={handleClose}>
-          Close
-        </button>
-        <button variant="primary" onClick={saveTask}>
+        <button onClick={handleClose}>Close</button>
+        <button onClick={saveTask} data-testid="submit">
           Save Changes
         </button>
       </Modal.Footer>
