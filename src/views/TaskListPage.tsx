@@ -14,16 +14,10 @@ import { rootState } from '../redux/reducers/RootReducer';
 function TaskListPage() {
   const dispatch = useDispatch();
   const [show, setShow] = useState(false);
-  const [showModal, setShowModal] = useState(false);
-  const [showEditModal, setShowEditModal] = useState(false);
-  const handleCloseModal = () => setShowModal(false);
-  const handleShowModal = () => setShowModal(true);
-  const handleCloseEditModal = () => setShowEditModal(false);
-  const handleShowEditModal = () => setShowEditModal(true);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   //const [tasks, setTasks] = useState([]);
-  const tasks = useSelector((state:rootState) => state.TaskReducer.tasks); 
+  // const tasks = useSelector((state:rootState) => state.TaskReducer.tasks); 
   useEffect(() => {
     //  initializeData();
     dispatch(getTasksDataAction());
@@ -46,7 +40,7 @@ function TaskListPage() {
         >
           <AddTask handleClose={handleClose} setShow={setShow} />
         </Modal>
-        <TaskLists tasks={tasks} handleShow={handleShow} />
+        <TaskLists handleShow={handleShow} />
         {/* <Modal
           show={showEditModal}
           onHide={handleCloseEditModal}
