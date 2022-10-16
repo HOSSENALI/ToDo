@@ -54,12 +54,16 @@ const TaskLists = (props: IProps) => {
               <th>Status</th>
               <th>Action</th>
             </tr>
-          </thead>
-          {tasks?.length === 0 && (
-            <h3 style={{ marginLeft: "300px" }}>
-              Sorry!!! You have no todo.........
-            </h3>
+            <tr>
+              <th colSpan={5}>
+              {tasks?.length === 0 && (
+              <h3 style={{ marginLeft: "300px" }}>
+                Sorry!!! You have no todo.........
+              </h3>
           )}
+              </th>
+            </tr>
+          </thead>
           <tbody>
             {tasks?.map((task, index) => (
               <tr key={index}>

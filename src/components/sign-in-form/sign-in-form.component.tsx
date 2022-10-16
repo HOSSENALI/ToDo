@@ -17,7 +17,6 @@ const defaultFormFields = {
 };
 
 const SignInForm = () => {
-    const [redirectTo] = useSearchParams("redirectTo");
     const [formFields, setFormFields] = useState(defaultFormFields);
     const {email, password} = formFields;
 
@@ -29,7 +28,7 @@ const SignInForm = () => {
         event.preventDefault();
 
         try {
-            await signInAuthUserWithEmailAndPassword(email, password, redirectTo);
+            await signInAuthUserWithEmailAndPassword(email, password);
             resetFormFields();
         } catch (error) {
             console.log('user sign in failed', error);

@@ -11,31 +11,28 @@ function App() {
   useEffect(() => {
     // @ts-ignore
     const userData = JSON.parse(localStorage.getItem("userData")) || undefined;
-    if (typeof userData !== 'undefined') {
+    if (typeof userData !== "undefined") {
       setCurrentUser(true);
-    }else{
-      setCurrentUser(false)
+    } else {
+      setCurrentUser(false);
     }
   }, [currentUser]);
 
   return (
     <div className="App">
-     
-<BrowserRouter>
-<Routes>
+      <BrowserRouter>
+        <Routes>
+          <Route
+            path="/"
+            element={currentUser ? <TaskListPage /> : <Navigate to="/login" />}
+          />
 
- 
-  <Route  path="/" element={
-    currentUser?<TaskListPage/>:<Navigate to="/login" />
-   } />
-
-  <Route  path="/login" element={
-    currentUser?<Navigate to="/" />:<Authentication/>
-   } />
-
-  </Routes>
-   </BrowserRouter>
-
+          <Route
+            path="/login"
+            element={currentUser ? <Navigate to="/" /> : <Authentication />}
+          />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }

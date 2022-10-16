@@ -18,26 +18,19 @@ const Header = () => {
 
   return (
     <>
-      <Navbar className="color-nav" variant="light"expand="lg" >
+      <Navbar className="color-nav" variant="light" >
         <div className="container">
-          <Navbar.Brand href="/">
+          <Navbar.Brand>
             Welcome to Board <b>{userData.user.displayName}</b>
           </Navbar.Brand>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav >
               {currentUser && (
-                <>
-                  <Nav.Link>
-                    <Link to="/">Home</Link>
-                  </Nav.Link>
-
-                  <Nav.Link>
-                    <Link onClick={signOutUser} to={""}>
+                <>  
+                  <Link onClick={signOutUser} to={""}>
                       {" "}
                       SignOut
                     </Link>
-                  </Nav.Link>
                 </>
               )}
             </Nav>
