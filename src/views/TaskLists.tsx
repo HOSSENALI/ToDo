@@ -29,7 +29,7 @@ const TaskLists = (props: IProps) => {
       return true;
     } else return false;
   };
-  const editUser = (task: Task) => {
+  const editTodo = (task: Task) => {
     dispatch(getTasksDetailsDataAction(task));
     handleShowEditModal();
   };
@@ -85,7 +85,7 @@ const TaskLists = (props: IProps) => {
                 <td>
                   <Button
                     className="fa fa-pencil btn btn-success pointer ml-2"
-                    onClick={() => editUser(task)}
+                    onClick={() => editTodo(task)}
                   >
                     {" "}
                     Edit
