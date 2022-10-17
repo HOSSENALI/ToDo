@@ -2,14 +2,12 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'font-awesome/css/font-awesome.min.css';
 import { useEffect, useState } from 'react';
 import { Modal } from 'react-bootstrap'
-
 import Layout from '../components/layouts/Layout';
 import TaskLists from './TaskLists';
 import AddTask from '../components/AddTask';
-import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { getTasksDataAction } from '../redux/actions/TaskAction';
-import { rootState } from '../redux/reducers/RootReducer';
+
 
 function TaskListPage() {
   const dispatch = useDispatch();
@@ -26,7 +24,7 @@ function TaskListPage() {
 
 
   return (
-    <>
+    <div >
       <Layout>
         
         {/* <CounterComponent /> */}
@@ -42,7 +40,7 @@ function TaskListPage() {
         </Modal>
         <TaskLists handleShow={handleShow} />
       </Layout>
-    </>
+    </div>
   );
 }
 

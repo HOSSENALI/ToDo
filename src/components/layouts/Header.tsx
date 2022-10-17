@@ -19,10 +19,10 @@ const Header = () => {
   return (
     <>
       <Navbar className="color-nav " variant="light" expand="lg" >
-        <div className="container">
-          <Navbar.Brand>
+        <div className="container ext-break">
+          <div text-nowrap>
             Welcome to Board <b>{userData.user.displayName}</b>
-          </Navbar.Brand>
+          </div>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ml-auto">
