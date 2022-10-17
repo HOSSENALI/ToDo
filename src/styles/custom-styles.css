@@ -22,13 +22,23 @@ a {
 
 }
 
-.taskTable{
-border: red;
-}
 h1{
   color: rgb(130, 151, 209);
   text-shadow: 5px 2px 4px #000000;
   font-size: 5rem;
   font-style: italic;
   margin: -1vw;
+ 
+}
+@media only screen and (max-width: 800px) {
+  .table{
+   font-size:10px;
+  }
+}
+@media only screen and (max-width: 800px) {
+  h1{
+   font-size:30px;
+   margin: 1vw;
+   text-shadow: 1px 2px 4px #000000;
+  }
 }
