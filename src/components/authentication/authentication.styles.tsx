@@ -6,7 +6,6 @@ export const AuthenticationContainer = styled.div`
   width: 80%;
   justify-content: space-around;
   margin: 30px auto;
-  border: 1px solid red;
 
   @media only screen and (max-width: 800px) {
     display: flex;

@@ -41,15 +41,6 @@ function TaskListPage() {
           <AddTask handleClose={handleClose} setShow={setShow} />
         </Modal>
         <TaskLists handleShow={handleShow} />
-        {/* <Modal
-          show={showEditModal}
-          onHide={handleCloseEditModal}
-          animation={true}
-          centered
-            >
-                <TaskListPage/>
-
-            </Modal> */}
       </Layout>
     </>
   );

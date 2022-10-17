@@ -35,7 +35,7 @@ const TaskLists = (props: IProps) => {
   };
   return (
     <Card className="card">
-      <Card.Body>
+      <Card.Body >
         <div>
           <Card.Title className="text-center todo-title align-self-end">
             <h1>My Todos</h1>
@@ -45,6 +45,7 @@ const TaskLists = (props: IProps) => {
             </button>
           </Card.Title>
         </div>
+        <div>
         <Table striped bordered hover>
           <thead>
             <tr>
@@ -57,7 +58,7 @@ const TaskLists = (props: IProps) => {
             <tr>
               <th colSpan={5}>
               {tasks?.length === 0 && (
-              <h3 style={{ marginLeft: "300px" }}>
+              <h3 >
                 Sorry!!! You have no todo.........
               </h3>
           )}
@@ -103,6 +104,8 @@ const TaskLists = (props: IProps) => {
             ))}
           </tbody>
         </Table>
+        </div>
+        
       </Card.Body>
       <Modal
         show={showEditModal}

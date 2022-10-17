@@ -6,7 +6,7 @@ import { signOutUser } from "../utils/firebase/firebase.utils";
 const Header = () => {
   const [currentUser, setCurrentUser] = useState(false);
   // @ts-ignore
-  const [userData, setUserData] = useState(JSON.parse(localStorage.getItem("userData")) || undefined);
+  const userData = JSON.parse(localStorage.getItem("userData")) || undefined;
 
   useEffect(() => {
     if (typeof userData != "undefined") {
@@ -18,14 +18,14 @@ const Header = () => {
 
   return (
     <>
-      <Navbar className="color-nav" variant="light" expand="lg" >
+      <Navbar className="color-nav " variant="light" expand="lg" >
         <div className="container">
           <Navbar.Brand>
             Welcome to Board <b>{userData.user.displayName}</b>
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="mr-auto">
+            <Nav className="ml-auto">
               {currentUser && (
                 <>  
                   <Link onClick={signOutUser} to={""}>
