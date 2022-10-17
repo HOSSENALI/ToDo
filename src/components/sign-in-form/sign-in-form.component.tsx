@@ -1,14 +1,15 @@
 import {ChangeEvent, FormEvent, useState} from 'react';
 
 import FormInput from '../form-input/form-input.component';
-import Button from '../button/button.component';
+// import Button from '../button/button.component';
 
 import {
     signInAuthUserWithEmailAndPassword,
 } from '../utils/firebase/firebase.utils';
 
-import {SignInContainer, ButtonsContainer} from './sign-in-form.styles';
+import {SignInContainer, ButtonsContainer, Button} from './sign-in-form.styles';
 import { useSearchParams } from 'react-router-dom';
+// import Button from '../button/button.component';
 
 
 const defaultFormFields = {
@@ -64,7 +65,7 @@ const SignInForm = () => {
                     value={password}
                 />
                 <ButtonsContainer>
-                    <Button type='submit'>Sign In</Button>
+                    <Button>Sign In</Button>
                 </ButtonsContainer>
             </form>
         </SignInContainer>

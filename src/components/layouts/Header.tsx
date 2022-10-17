@@ -18,13 +18,14 @@ const Header = () => {
 
   return (
     <>
-      <Navbar className="color-nav" variant="light" >
+      <Navbar className="color-nav" variant="light" expand="lg" >
         <div className="container">
           <Navbar.Brand>
             Welcome to Board <b>{userData.user.displayName}</b>
           </Navbar.Brand>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
-            <Nav >
+            <Nav className="mr-auto">
               {currentUser && (
                 <>  
                   <Link onClick={signOutUser} to={""}>
