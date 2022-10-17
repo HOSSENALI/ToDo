@@ -2,12 +2,12 @@
 
 ## Live Demo
 
-[Task Management](https://mytask-management.netlify.app/)
+[Task Management](https://mytodomanagement.netlify.app/)
 
 # About Project
 
-This is a personal Frontend Project!!
-This is a project where you can manage your ToDO.You can set the task status,deadline,you can delete and update your ToDo as well.
+This is a coding challenge for Frontend Development from VP Verbund Pflegehilfe GmbH!!
+This is a project where you can manage your ToDo.You can set the task status,deadline,you can delete and update your ToDo as well.
 Built with these following technologies :
 focused on maily in:
 - [React](https://facebook.github.io/react/)
