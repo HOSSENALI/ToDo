@@ -2,7 +2,7 @@
 
 ## Live Demo
 
-[Task Management](https://mytodomanagement.netlify.app/)
+[ToDo Management](https://mytodomanagement.netlify.app/)
 
 # About Project
 
