@@ -7,11 +7,12 @@
 # About Project
 
 This is a personal Frontend Project!!
-This is a project where you can manage your task.You can set the task priority,you can delete and update your task.
+This is a project where you can manage your ToDO.You can set the task status,deadline,you can delete and update your ToDo as well.
 Built with these following technologies :
 focused on maily in:
 - [React](https://facebook.github.io/react/)
 - [Redux](http://redux.js.org/)
+- [TypeScript](https://www.typescriptlang.org/)
 
 # To run this app
 
