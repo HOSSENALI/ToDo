@@ -18,20 +18,22 @@ const Header = () => {
 
   return (
     <>
-      <Navbar className="color-nav " variant="light" expand="lg" >
-        <div className="container ext-break">
-          <div text-nowrap>
-            Welcome to Board <b>{userData.user.displayName}</b>
+      <Navbar className="color-nav p-45" variant="light" expand="lg">
+        <div className="container p-3">
+          <div text-nowrap h-45 >
+            <div className="text-uppercase">
+              Welcome to Board &#8986;<b> {userData.user.displayName}</b>
+            </div>
           </div>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ml-auto">
               {currentUser && (
-                <>  
+                <>
                   <Link onClick={signOutUser} to={""}>
-                      {" "}
-                      SignOut
-                    </Link>
+                    {" "}
+                    SignOut
+                  </Link>
                 </>
               )}
             </Nav>

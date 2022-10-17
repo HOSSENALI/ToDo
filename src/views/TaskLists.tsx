@@ -36,14 +36,14 @@ const TaskLists = (props: IProps) => {
       <Card.Body className="table-responsive-sm">
         <div>
           <Card.Title className="text-center">
-            <h1>My Todos</h1>
+            <h1 className="headline">My Todos</h1>
               <button className="btn btn-success float-right mb-2" onClick={handleShow}>
                 + Add Task
             </button>
           </Card.Title>
         </div>
         <div>
-        <Table  striped bordered hover>
+        <Table striped bordered hover>
           <thead>
             <tr>
               <th>No</th>
