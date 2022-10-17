@@ -1,8 +1,9 @@
-
 const Footer = () => {
-    return ( <>
-    <div className='footer' >reserved by @Hossen Ali</div>
-    </> );
-}
- 
-export default Footer;
+    return (
+      <footer>
+       All Rights Reserved by Hossen Ali © || ⌛ {new Date().getFullYear()} ⌛{" "}
+      </footer>
+    );
+  };
+  
+  export default Footer;
