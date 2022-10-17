@@ -18,6 +18,8 @@ focused on maily in:
 
 ## After Cloning/Forking this repo, In the project directory run these commands,
 
+### Create .env file in the root directory and add the values from .env.example.
+
 ## `npm install`
 
 ## `npm run start`

@@ -43,7 +43,7 @@ const TaskLists = (props: IProps) => {
           </Card.Title>
         </div>
         <div>
-        <Table striped bordered hover>
+        <Table striped bordered hover className="headline">
           <thead>
             <tr>
               <th>No</th>
