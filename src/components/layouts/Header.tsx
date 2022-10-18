@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Navbar, Nav } from "react-bootstrap";
+import { Navbar, Nav, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { signOutUser } from "../utils/firebase/firebase.utils";
 
@@ -32,7 +32,7 @@ const Header = () => {
                 <>
                   <Link onClick={signOutUser} to={""}>
                     {" "}
-                    SignOut
+                    <Button className="btn btn-secondary">SignOut</Button>
                   </Link>
                 </>
               )}

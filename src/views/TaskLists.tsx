@@ -37,72 +37,74 @@ const TaskLists = (props: IProps) => {
         <div>
           <Card.Title className="text-center">
             <h1 className="headline">My Todos</h1>
-              <button className="btn btn-success float-right mb-2" onClick={handleShow}>
-                + Add Task
+            <button
+              className="btn btn-success float-right mb-2"
+              onClick={handleShow}
+            >
+              + Add Task
             </button>
           </Card.Title>
         </div>
         <div>
-        <Table striped bordered hover className="headline">
-          <thead>
-            <tr>
-              <th>No</th>
-              <th>Task Title</th>
-              <th>Deadline</th>
-              <th>Status</th>
-              <th>Action</th>
-            </tr>
-            <tr>
-              <th colSpan={5}>
-              {tasks?.length === 0 && (
-              <h3 >
-                Sorry!!! You have no todo.........
-              </h3>
-          )}
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {tasks?.map((task, index) => (
-              <tr key={index}>
-                <td>{index + 1}</td>
-                <td>{task.todo.title}</td>
-
-                <td>
-                  {overdueCheck(task.todo.deadline, task.todo.status) ? (
-                    <span style={{ color: "red" }}>{task.todo.deadline}</span>
-                  ) : (
-                    <span>{task.todo.deadline}</span>
-                  )}
-                </td>
-                <td>
-                  {task.todo.status === "Pending" && task.todo.status}
-                  {task.todo.status === "Done" && <del>{task.todo.status}</del>}
-                </td>
-
-                <td>
-                  <Button
-                    className="fa fa-pencil btn btn-success pointer ml-2"
-                    onClick={() => editTodo(task)}
-                  >
-                    {" "}
-                    Edit
-                  </Button>
-
-                  <Button
-                    className="fa fa-trash btn btn-danger pointer ml-2"
-                    onClick={() => dispatch(deleteTasksDataAction(task.id))}
-                  >
-                    {" "}
-                    Delete
-                  </Button>
-                </td>
+          <Table striped bordered hover className="headline">
+            <thead>
+              <tr>
+                <th>No</th>
+                <th>Task Title</th>
+                <th>Deadline</th>
+                <th>Status</th>
+                <th>Action</th>
               </tr>
-            ))}
-          </tbody>
-        </Table>
+              {tasks?.length === 0 && (
+                <tr>
+                  <th colSpan={5}>
+                    <h3>Sorry!!! You have no todo.........</h3>
+                  </th>
+                </tr>
+              )}
+            </thead>
+            <tbody>
+              {tasks?.map((task, index) => (
+                <tr key={index}>
+                  <td>{index + 1}</td>
+                  <td>{task.todo.title}</td>
+
+                  <td>
+                    {overdueCheck(task.todo.deadline, task.todo.status) ? (
+                      <span style={{ color: "red" }}>{task.todo.deadline}</span>
+                    ) : (
+                      <span>{task.todo.deadline}</span>
+                    )}
+                  </td>
+                  <td>
+                    {task.todo.status === "Pending" && task.todo.status}
+                    {task.todo.status === "Done" && (
+                      <del>{task.todo.status}</del>
+                    )}
+                  </td>
+
+                  <td>
+                    <Button
+                      className="fa fa-pencil btn btn-success pointer ml-2"
+                      onClick={() => editTodo(task)}
+                    >
+                      {" "}
+                      Edit
+                    </Button>
+
+                    <Button
+                      className="fa fa-trash btn btn-danger pointer ml-2"
+                      onClick={() => dispatch(deleteTasksDataAction(task.id))}
+                    >
+                      {" "}
+                      Delete
+                    </Button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
         </div>
-        
       </Card.Body>
       <Modal
         show={showEditModal}
