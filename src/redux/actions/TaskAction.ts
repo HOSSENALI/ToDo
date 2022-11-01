@@ -33,7 +33,7 @@ export const getTasksDataAction = () => (dispatch: Dispatch) => {
 
 //storing data to database.......................................................
 export const storeTasksDataAction =
-  (taskItem: singleTask) => (dispatch: Dispatch) => {
+  (taskItem: singleTask) => () => {
     db.collection("todos").add(taskItem);
   };
 
@@ -44,7 +44,7 @@ export const getTasksDetailsDataAction =
   };
 
 //updating data to database......................................................
-export const updateTasksDataAction = (taskFormNew: any, taskId: any) => () => {
+export const updateTasksDataAction = (taskFormNew: Types.newTaskForm, taskId: string) => () => {
   db.collection("todos").doc(taskId).set(taskFormNew, { merge: true });
 };
 //deleting task from database......................................................

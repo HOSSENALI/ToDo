@@ -38,7 +38,6 @@ export const createAuthUserWithEmailAndPassword = async (
   createUserWithEmailAndPassword(auth, email, password).then(
     (userCredentials) => {
       const user = userCredentials.user;
-      console.log("user", user);
       updateProfile(user, { displayName: displayName })
         .then(() => {
           signInAuthUserWithEmailAndPassword(email,password);

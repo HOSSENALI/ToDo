@@ -11,6 +11,10 @@ export interface TaskForm {
   deadline: string;
   createdAt: string;
 }
+export interface newTaskForm {
+  title: string;
+  status: string;
+}
 
 export type GET_TASK_DETAILS = {
   type: typeof GET_TASK_DETAILS;

@@ -1,16 +1,9 @@
 import {ChangeEvent, FormEvent, useState} from 'react';
-
 import FormInput from '../form-input/form-input.component';
-// import Button from '../button/button.component';
-
 import {
     signInAuthUserWithEmailAndPassword,
 } from '../utils/firebase/firebase.utils';
-
 import {SignInContainer, ButtonsContainer, Button} from './sign-in-form.styles';
-import { useSearchParams } from 'react-router-dom';
-// import Button from '../button/button.component';
-
 
 const defaultFormFields = {
     email: '',

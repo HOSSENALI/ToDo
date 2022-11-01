@@ -24,13 +24,11 @@ const initializeState: InitializeState = {
     createdAt: "",
     deadline: "",
     status: "",
-    title: ""
-   
+    title: "" 
   },
 };
 
 //Do jobs on changes on action...........
-
 function TaskReducer(
   state = initializeState,
   action: Types.TaskActions

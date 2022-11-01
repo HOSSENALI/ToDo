@@ -1,16 +1,16 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { serverTimestamp } from "firebase/firestore";
+import { FieldValue, serverTimestamp } from "firebase/firestore";
 
 import { storeTasksDataAction } from "../redux/actions/TaskAction";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch} from "react-redux";
 import moment from "moment";
-import { type } from "@testing-library/user-event/dist/type";
+import { Button } from "react-bootstrap";
 
 type Iprops = {
   handleClose: () => void;
@@ -20,9 +20,9 @@ type Iprops = {
 export type singleTask = {
   title: string;
   status: string;
-  deadline?: string;
-  createdAt?: any;
-  userEmail?: string;
+  deadline: string;
+  createdAt: FieldValue;
+  userEmail: string;
 };
 const AddTask = (props: Iprops) => {
   const [title, setTitle] = useState("");
@@ -33,11 +33,10 @@ const AddTask = (props: Iprops) => {
 
   const saveTask = async () => {
     if (checkValidation()) {
-     
       const userData =
-    // @ts-ignore
+        // @ts-ignore
         JSON.parse(localStorage.getItem("userData")) || undefined;
-        console.log(userData)
+
       const taskForm: singleTask = {
         title,
         status,
@@ -78,55 +77,44 @@ const AddTask = (props: Iprops) => {
       </Modal.Header>
       <Modal.Body>
         <Form>
-          <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+          <Form.Group>
             <Form.Label>Task Title</Form.Label>
             <Form.Control
               type="text"
               placeholder="Enter task title"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              autoFocus
-              data-testid="title"
             />
           </Form.Group>
 
-          <Form.Group
-            as={Row}
-            className="mb-3"
-            controlId="formPlaintextPassword"
-          >
-            <Form.Label column sm="4">
+          <Form.Group as={Row}>
+            <Form.Label column sm="2">
               Deadline
             </Form.Label>
-            <Col sm="5"    data-testid="deadline">
-         
+            <Col sm="6">
               <DatePicker
                 selected={deadline}
                 onChange={(date: Date) => setDeadline(date)}
                 dateFormat="yyyy/MM/dd"
                 filterDate={(date: Date) =>
-                  date.getDay() != 6 && date.getDay() != 0
+                  date.getDay() !== 6 && date.getDay() !== 0
                 }
                 isClearable
+                minDate={new Date()}
                 showYearDropdown
                 scrollableMonthYearDropdown
-               
+                className="form-control"
               />
             </Col>
           </Form.Group>
 
-          <Form.Group
-            as={Row}
-            className="mb-3"
-            controlId="formPlaintextPassword"
-          >
-            <Form.Label column sm="4">
+          <Form.Group as={Row}>
+            <Form.Label column sm="2">
               Status
             </Form.Label>
             <Col sm="6">
               <select
                 className="form-control"
-                style={{ appearance: "revert" }}
                 required
                 value={status}
                 onChange={(e) => setStatus(e.target.value)}
@@ -140,11 +128,13 @@ const AddTask = (props: Iprops) => {
           </Form.Group>
         </Form>
       </Modal.Body>
-      <Modal.Footer>
-        <button onClick={handleClose}>Close</button>
-        <button onClick={saveTask} data-testid="submit">
-          Save Changes
-        </button>
+      <Modal.Footer className="mr-2">
+        <Button variant="danger" onClick={handleClose}>
+          Close
+        </Button>
+        <Button variant="primary" onClick={saveTask} data-testid="submit">
+          Save Task
+        </Button>
       </Modal.Footer>
     </>
   );
