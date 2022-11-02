@@ -13,7 +13,6 @@ function TaskListPage() {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-
   useEffect(() => {
     //  initializeData();
     dispatch(getTasksDataAction());
@@ -22,7 +21,6 @@ function TaskListPage() {
   return (
     <div>
       <Layout>
-       
         <br />
         <Modal show={show} onHide={handleClose} animation={true} centered>
           <AddTask handleClose={handleClose} setShow={setShow} />

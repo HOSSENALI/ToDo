@@ -3,6 +3,7 @@ import App from "./App";
 import { Provider } from "react-redux";
 import configureStore from "redux-mock-store";
 
+
 test("renders App Correctly", () => {
   const initialState = {
     tasks: [],
@@ -24,4 +25,7 @@ test("renders App Correctly", () => {
   );
   const linkElement = screen.getByText(/Sign in with your email and password/i);
   expect(linkElement).toBeInTheDocument();
+  const linkElement1 = screen.getByText(/Sign up with your email and password/i);
+  expect(linkElement1).toBeInTheDocument();
+ 
 });
